@@ -3,8 +3,9 @@ import PeopleInfo from './PeopleInfo.js'
 
 export default function App({ target }) {
   this.state = {
-    currentData: null, // array
-    totalPeople: 0, // number
+    currentData: null,
+    totalPeople: 0,
+    totalTeamNum: 0,
   }
 
   this.setState = (nextState) => {
@@ -14,13 +15,14 @@ export default function App({ target }) {
   new PeopleInfo({
     target,
     initialState: this.state,
-    onSubmit: async (text) => {
-      const dataFrame = await processInput(text)
-      console.log(dataFrame)
+    onSubmit: async (text, numOfTeam) => {
+      const preprocessedInput = await processInput(text)
+      console.log(preprocessedInput)
       this.setState({
         ...this.state,
-        currentData: dataFrame,
-        totalPeople: dataFrame.length,
+        currentData: preprocessedInput,
+        totalPeople: preprocessedInput.length,
+        totalTeamNum: numOfTeam,
       })
     },
   })
