@@ -1,7 +1,7 @@
 import UserInfo from './UserInfo.js';
 import UserList from './UserList.js';
 
-export default function UserPage({ $target, initialState }) {
+export default function UserPage({ $target, initialState, onScrollEnd }) {
   const $userPage = document.createElement('div');
   $userPage.className = 'userPage';
 
@@ -20,6 +20,7 @@ export default function UserPage({ $target, initialState }) {
   const userList = new UserList({
     $target: $userPage,
     initialState: this.state.items,
+    onScrollEnd,
   });
 
   this.setState = (nextState) => {
