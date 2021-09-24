@@ -14,7 +14,14 @@ export default function MyCoins({ $target, initialState }) {
     $container.innerHTML = `
       <h1>My Coins</h1>
       <ul>
-        ${this.state.myCoins.map((coin) => `<li>${coin}</li>`)}
+        ${this.state.myCoins
+          .map(
+            ({ id, name, countity, price }) => `
+          <li data-id=${id}>
+            ${name}
+          </li>`,
+          )
+          .join('')}
       </ul>
       `;
   };

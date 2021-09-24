@@ -29,14 +29,14 @@ export default function App({ $target }) {
       coins: this.state.coins,
       wallet: this.state.wallet,
     },
-    onPurchase: ({ id, name, countity, price }) => {
-      console.log(id, countity, price);
+    onPurchase: ({ selectedCoin, countity }) => {
+      const { id, name, image, current_price: price } = selectedCoin;
       const { myCoins } = this.state;
       const index = myCoins.findIndex((coin) => coin.id === id);
       if (index >= 0) {
         myCoins[index].countity = countity;
       } else {
-        myCoins.push({ id, name, countity, price });
+        myCoins.push({ id, name, image, price, countity });
       }
       this.setState({ ...this.state, myCoins });
       setItem(STORAGE_KEY.MY_COIN, myCoins);
@@ -56,7 +56,6 @@ export default function App({ $target }) {
   this.init = async () => {
     await getCoins();
     const myCoins = getItem(STORAGE_KEY.MY_COIN, []);
-    console.log(myCoins);
     if (myCoins.length) {
       this.setState({ ...this.state, myCoins });
     }

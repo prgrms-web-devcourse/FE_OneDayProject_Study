@@ -67,9 +67,13 @@ export default function Coins({ $target, initialState, onPurchase }) {
       const {
         id,
         name,
+        image,
         current_price: price,
       } = this.state.coins.find((coin) => coin.id === coinId);
-      this.setState({ ...this.state, selectedCoin: { id, name, price } });
+      this.setState({
+        ...this.state,
+        selectedCoin: { id, name, image, price },
+      });
       purchaseComp.mount($li);
     }
   });

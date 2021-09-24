@@ -57,10 +57,8 @@ export default function Purchase({ initialState, onPurchase }) {
     const $input = $form.querySelector('input');
     const countity = Number($input.value);
     onPurchase({
-      id: this.state.selectedCoin.id,
-      name: this.state.selectedCoin.name,
+      selectedCoin: this.state.selectedCoin,
       countity,
-      price: this.state.selectedCoin.price,
     });
     this.unMount(e.target);
   });
