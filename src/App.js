@@ -2,9 +2,9 @@
 import { apiResponse } from './apiData.js';
 
 // import AuthPage from './AuthPage.js';
-import UserPage from './UserPage.js';
+import UserPage from './components/UserPage.js';
 // import SharePage from './SharePage.js';
-import { initRouter } from './router.js';
+import { initRouter } from './components/router.js';
 
 export default function App({ $target }) {
   this.state = {
