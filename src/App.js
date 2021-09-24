@@ -1,5 +1,6 @@
 import processInput from '../util/processInput.js'
 import PeopleInfo from './PeopleInfo.js'
+import ResultBox from './ResultBox.js'
 
 export default function App({ target }) {
   this.state = {
@@ -10,14 +11,14 @@ export default function App({ target }) {
 
   this.setState = (nextState) => {
     this.state = nextState
+    resultBox.setState(this.state)
   }
 
-  new PeopleInfo({
+  const peopleInfo = new PeopleInfo({
     target,
     initialState: this.state,
     onSubmit: async (text, numOfTeam) => {
       const preprocessedInput = await processInput(text)
-      console.log(preprocessedInput)
       this.setState({
         ...this.state,
         currentData: preprocessedInput,
@@ -25,5 +26,10 @@ export default function App({ target }) {
         totalTeamNum: numOfTeam,
       })
     },
+  })
+
+  const resultBox = new ResultBox({
+    target,
+    initialState: this.state,
   })
 }

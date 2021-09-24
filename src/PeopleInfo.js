@@ -34,13 +34,14 @@ export default function PeopleInfo({ target, initialState, onSubmit }) {
     slider.max = Math.floor(text.length / 2)
     if (slider.max === 0) slider.value = 0
     if (slider.max < slider.value) slider.value = 1
+
+    this.state.currentData = text
   })
 
   infoFormat.addEventListener('click', (e) => {
     const target = e.target.closest('button')
     if (target) {
-      const text = textarea.value
-      onSubmit(text, slider.value)
+      onSubmit(this.state.currentData, slider.value)
     }
   })
 }

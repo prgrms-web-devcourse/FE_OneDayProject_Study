@@ -1,10 +1,10 @@
 export default function processInput(text) {
-  const processedInput = text.split('\n').map((eachPerson) =>
-    eachPerson
-      .trim()
-      .split(',')
-      .map((str) => str.trim()),
-  )
+  const processedInput = []
+
+  text.map((eachPerson) => {
+    const [name, mbti] = eachPerson.split(',')
+    processedInput.push([name, mbti.trim()])
+  })
 
   return processedInput
 }
