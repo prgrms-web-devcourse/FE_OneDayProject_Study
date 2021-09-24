@@ -2,7 +2,7 @@ import Coins from './component/Coins.js';
 import MyCoins from './component/MyCoins.js';
 import Wallet from './component/Wallet.js';
 import { coinApi } from './util/api.js';
-import { setItem } from './util/storage.js';
+import { getItem, setItem, STORAGE_KEY } from './util/storage.js';
 
 export default function App({ $target }) {
   this.state = { coins: [], myCoins: [], selectedCoin: {}, wallet: 5000000000 };
@@ -29,12 +29,17 @@ export default function App({ $target }) {
       coins: this.state.coins,
       wallet: this.state.wallet,
     },
-    onPurchase: ({ id, countity, price }) => {
-      console.log(id, countity);
+    onPurchase: ({ id, name, countity, price }) => {
+      console.log(id, countity, price);
       const { myCoins } = this.state;
-      myCoins.push({ id, countity, price });
+      const index = myCoins.findIndex((coin) => coin.id === id);
+      if (index >= 0) {
+        myCoins[index].countity = countity;
+      } else {
+        myCoins.push({ id, name, countity, price });
+      }
       this.setState({ ...this.state, myCoins });
-      setItem(id, countity);
+      setItem(STORAGE_KEY.MY_COIN, myCoins);
     },
   });
 
@@ -48,8 +53,13 @@ export default function App({ $target }) {
     initialState: { wallet: this.state.wallet },
   });
 
-  this.init = () => {
-    getCoins();
+  this.init = async () => {
+    await getCoins();
+    const myCoins = getItem(STORAGE_KEY.MY_COIN, []);
+    console.log(myCoins);
+    if (myCoins.length) {
+      this.setState({ ...this.state, myCoins });
+    }
   };
 
   this.init();
