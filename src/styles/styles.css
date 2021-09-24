@@ -1,0 +1,8 @@
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+.none {
+  display: none;
+}
