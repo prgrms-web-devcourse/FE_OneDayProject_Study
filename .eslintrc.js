@@ -11,6 +11,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'require-jsdoc': 'off',
     'prettier/prettier': [
       'error',
       {
@@ -19,10 +20,10 @@ module.exports = {
         singleQuote: true,
         trailingComma: 'all',
         bracketSpacing: true,
-        semi: false,
+        semi: true,
         useTabs: false,
         endOfLine: 'auto',
       },
     ],
   },
-}
+};
