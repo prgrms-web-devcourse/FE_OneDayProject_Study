@@ -1,3 +1,4 @@
+import processInput from '../util/processInput.js'
 import PeopleInfo from './PeopleInfo.js'
 
 export default function App({ target }) {
@@ -12,9 +13,9 @@ export default function App({ target }) {
   new PeopleInfo({
     target,
     initialState: this.state,
-    onSubmit: (text) => {
-      console.log(text)
-      return 0
+    onSubmit: async (text) => {
+      const dataFrame = await processInput(text)
+      console.log(dataFrame)
     },
   })
 }

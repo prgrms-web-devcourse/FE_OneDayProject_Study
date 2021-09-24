@@ -14,11 +14,12 @@
 
 .inputText {
   text-align: left;
-  vertical-align: middle;
   height: 120px;
   width: 200px;
   font-size: 0.8em;
   word-break: break-word;
+  resize: none;
+  box-sizing: border-box;
 }
 
 .submitbutton {
@@ -26,4 +27,9 @@
   height: 30px;
   width: 200px;
   font-size: 0.8em;
+}
+
+.resultBox {
+  margin-left: 40px;
+  margin-right: 40px;
 }
