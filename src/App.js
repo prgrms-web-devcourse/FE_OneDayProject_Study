@@ -3,7 +3,8 @@ import PeopleInfo from './PeopleInfo.js'
 
 export default function App({ target }) {
   this.state = {
-    currentPeople: '',
+    currentData: null, // array
+    totalPeople: 0, // number
   }
 
   this.setState = (nextState) => {
@@ -16,6 +17,11 @@ export default function App({ target }) {
     onSubmit: async (text) => {
       const dataFrame = await processInput(text)
       console.log(dataFrame)
+      this.setState({
+        ...this.state,
+        currentData: dataFrame,
+        totalPeople: dataFrame.length,
+      })
     },
   })
 }

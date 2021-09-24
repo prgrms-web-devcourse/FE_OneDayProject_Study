@@ -1,4 +1,4 @@
-export default function makeDataFrame(text) {
+export default function processInput(text) {
   /**
    * 
   '이름, mbti
