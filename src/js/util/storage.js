@@ -1,5 +1,6 @@
 export const STORAGE_KEY = {
   MY_COIN: 'my-coin',
+  WALLET: 'wallet',
 };
 const storage = window.localStorage;
 

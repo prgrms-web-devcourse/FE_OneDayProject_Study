@@ -1,8 +1,8 @@
 import { formatter } from '../util/formatter.js';
 
-export default function Purchase({ $target, initialState, onPurchase }) {
+export default function SellCoin({ $target, initialState, onSell }) {
   const $form = document.createElement('form');
-  $form.className = 'container-purchase';
+  $form.className = 'container-sell';
 
   this.state = initialState;
 
@@ -12,18 +12,19 @@ export default function Purchase({ $target, initialState, onPurchase }) {
 
   this.render = () => {
     $form.innerHTML = `
-    <h1>Buy</h1>
-    <label for="purchaseInput">${this.state.selectedCoin?.name} 구입 갯수</label>
-    <input id="purchaseInput" type="number" step="0.01" min="0" required/>
-    <span>총 금액</span>
-    <span class="purchase-total">0원</span>
-    <button>구입</button> 
-    `;
+      <h1>Sell</h1>
+      <label for="sellInput">${this.state.selectedCoin.name} 판매 갯수</label>
+      <input id="sellInput" type="number" step="0.01" min="0" required/>
+      <span>총 금액</span>
+      <span class="sell-total">0원</span>
+      <button>판매</button> 
+      `;
   };
 
   this.render();
 
   this.parent = null;
+
   this.mount = (parent = $target) => {
     this.unMount();
     this.parent = parent;
@@ -40,15 +41,10 @@ export default function Purchase({ $target, initialState, onPurchase }) {
 
   // Event Listener
   $form.addEventListener('input', (e) => {
-    const { price } = this.state.selectedCoin;
-    const $total = $form.querySelector('.purchase-total');
-    const totalCost = e.target.value * price;
-    if (
-      totalCost > this.state.wallet ||
-      parseFloat(e.target.value) >
-        parseFloat(this.state.wallet / price - 0.01).toFixed(2)
-    ) {
-      e.target.value = parseFloat(this.state.wallet / price - 0.01).toFixed(2);
+    const { price, countity } = this.state.selectedCoin;
+    const $total = $form.querySelector('.sell-total');
+    if (e.target.value > countity) {
+      e.target.value = countity;
     }
     $total.textContent = `${formatter.currency(e.target.value * price)}원`;
   });
@@ -57,7 +53,7 @@ export default function Purchase({ $target, initialState, onPurchase }) {
     e.preventDefault();
     const $input = $form.querySelector('input');
     const countity = Number($input.value);
-    onPurchase({
+    onSell({
       selectedCoin: this.state.selectedCoin,
       countity,
     });

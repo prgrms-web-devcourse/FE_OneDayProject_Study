@@ -74,7 +74,7 @@ export default function Coins({ $target, initialState, onPurchase }) {
         ...this.state,
         selectedCoin: { id, name, image, price },
       });
-      purchaseComp.mount($li);
+      purchaseComp.mount();
     }
   });
 }
