@@ -20,6 +20,10 @@ export default function HomePage({ $target, initialState, onSubscribe }) {
     },
   })
 
+  const $title = document.createElement('h1')
+  $title.textContent = '프롱이 기록을 모아모아 👀'
+  $page.appendChild($title)
+
   const feed = new Feed({
     $target: $page,
     initialState: this.state.items,

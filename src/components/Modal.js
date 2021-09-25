@@ -24,6 +24,7 @@ export default function Modal({ $target, $modalBody }) {
 
   this.render = () => {
     $modalContainer.className = this.state.isOpen ? 'modal-container' : 'none'
+    $modalContainer.querySelector('input').focus()
   }
 
   $backdrop.addEventListener('click', (e) => {
