@@ -43,5 +43,13 @@ export default function Feed({ $target, initialState }) {
     `
   }
 
+  $feed.addEventListener('click', (e) => {
+    e.preventDefault()
+    const { className } = e.target
+    if (className === 'feed__link') {
+      window.open(e.target.href)
+    }
+  })
+
   this.render()
 }
