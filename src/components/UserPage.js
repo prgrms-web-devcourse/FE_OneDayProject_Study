@@ -8,7 +8,6 @@ export default function UserPage({ $target, initialState, onScrollEnd }) {
   $target.appendChild($userPage);
 
   this.state = initialState;
-
   const userInfo = new UserInfo({
     $target: $userPage,
     initialState: {
@@ -19,7 +18,10 @@ export default function UserPage({ $target, initialState, onScrollEnd }) {
   });
   const userList = new UserList({
     $target: $userPage,
-    initialState: this.state.items,
+    initialState: {
+      items: this.state.items,
+      selectedItems: this.state.selectedItems,
+    },
     onScrollEnd,
   });
 
@@ -32,6 +34,9 @@ export default function UserPage({ $target, initialState, onScrollEnd }) {
       totalResults: this.state.totalResults,
     });
 
-    userList.setState(this.state.items);
+    userList.setState({
+      items: this.state.items,
+      selectedItems: this.state.selectedItems,
+    });
   };
 }

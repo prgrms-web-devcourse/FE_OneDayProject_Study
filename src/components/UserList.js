@@ -5,12 +5,10 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
   $target.appendChild($userList);
 
   this.state = initialState;
-
   let isInitialize = true;
 
   this.setState = (nextState) => {
     this.state = nextState;
-
     this.render();
   };
 
@@ -32,11 +30,11 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
     if (isInitialize) {
       $userList.innerHTML = `
       <div class="userList__controlPanel">
-        <button class="controlPanel__selectAll">전체 선택</button>
-        <button class="controlPanel__share">선택 채널 공유하기</button>
+        <button class="controlPanel__selectAll">전체 해제</button>
+        <button class="controlPanel__share">공유 목록 저장하기</button>
       </div>
       <div class="userList__contents">
-        ${this.state
+        ${this.state.items
           .map(
             (item) => `
           <div id=${item.snippet.resourceId.channelId} class="userList__item">
@@ -52,7 +50,7 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
 
       isInitialize = false;
     } else {
-      this.state.forEach((item) => {
+      this.state.items.forEach((item) => {
         const $item = document.createElement('div');
         $item.id = item.snippet.resourceId.channelId;
         $item.className = 'userList__item';
@@ -70,6 +68,18 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
     observer.observe($userList.querySelector('.userList__item:last-child'));
   };
 
+  // const isSelectAll = true;
+
+  const addSelected = (channelId) => {
+    this.state.selectedItems.push(channelId);
+  };
+  const removeSelected = (channelId) => {
+    this.state.selectedItems.splice(
+      this.state.selectedItems.indexOf(channelId),
+      1,
+    );
+  };
+
   $userList.addEventListener('click', (e) => {
     if (e.target.className === 'userList__thumbnail') {
       const $item = e.target.closest('div');
@@ -78,16 +88,42 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
 
     if (e.target.className === 'userList__button') {
       const $item = e.target.closest('div');
-      console.log($item.classList.length);
+
+      // 선택, 해제 내용을 id만 담아뒀다가, 내보내기 할 때 subscriptionList에서 item에 필요정보를 취합해서 내보낸다?
+      // 그리고 sharedList 업데이트
+
       if ($item.classList.length === 1) {
         $item.classList.add('selected');
+        addSelected($item.id);
       } else {
         $item.classList.remove('selected');
+        removeSelected($item.id);
       }
     }
 
+    // 전체 선택, 전체 해제
+    // if (e.target.className === 'controlPanel__selectAll') {
+    //   const $selectAllButton = e.target;
+    //   const items = $userList.querySelectorAll('.userList__item');
+    //   if (isSelectAll) {
+    //     $selectAllButton.textContent = '전체 선택';
+    //     isSelectAll = !isSelectAll;
+
+    //     items.forEach((item) => {
+    //       item.classList.remove('selected');
+    //     });
+    //   } else {
+    //     $selectAllButton.textContent = '전체 해제';
+    //     isSelectAll = !isSelectAll;
+
+    //     items.forEach((item) => {
+    //       item.classList.add('selected');
+    //     });
+    //   }
+    // }
+
     if (e.target.className === 'controlPanel__share') {
-      // 현재 선택되어 있는
+      // 현재 선택되어 있는 item들 db로 내보내기
     }
   });
 }

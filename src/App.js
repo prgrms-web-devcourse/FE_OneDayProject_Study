@@ -31,6 +31,7 @@ export default function App({ $target }) {
       nickname: this.state.userProfile.nickname,
       totalResults: this.state.subscriptionList.totalResults,
       items: this.state.subscriptionList.items,
+      selectedItems: this.state.sharedList.items.map((item) => item.channelId),
     },
     onScrollEnd: async () => {
       const nextPageToken = getItem('nextPageToken');
@@ -61,6 +62,9 @@ export default function App({ $target }) {
   // const sharePage = new SharePage({ $target });
 
   this.setState = (nextState, renderPage) => {
+    if (renderPage === 'none') {
+      this.state = nextState;
+    }
     if (renderPage === 'authPage') {
       authPage.setState();
     } else if (renderPage === 'userPage') {
@@ -70,6 +74,9 @@ export default function App({ $target }) {
         nickname: this.state.userProfile.nickname,
         totalResults: this.state.subscriptionList.totalResults,
         items: this.state.subscriptionList.items,
+        selectedItems: this.state.sharedList.items.map(
+          (item) => item.channelId,
+        ),
       });
     }
     // else if (renderPage === 'sharePage') {
@@ -92,8 +99,8 @@ export default function App({ $target }) {
         ...this.state,
         isAuthorized: true,
       };
-      // 직접 할당?
-      this.state = nextState;
+
+      this.setState(nextState, 'none');
       push('/');
     } else if (pathname === '/' && this.state.isAuthorized) {
       const accessToken = getItem('accessToken');

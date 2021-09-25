@@ -3,6 +3,23 @@
   margin: 0;
 }
 
+.authPage__signInButton {
+  border: none;
+  box-shadow: 3px 3px 3px grey;
+  background-color: transparent;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+}
+
+.authPage__signInButton:active {
+  margin-left: 5px;
+  margin-top: 5px;
+  box-shadow: none;
+}
+
 .userInfo {
   display: flex;
   justify-content: center;
