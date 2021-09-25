@@ -1,4 +1,9 @@
-export default function UserList({ $target, initialState, onScrollEnd }) {
+export default function UserList({
+  $target,
+  initialState,
+  onScrollEnd,
+  onSave,
+}) {
   const $userList = document.createElement('div');
   $userList.className = 'userList';
 
@@ -31,7 +36,7 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
       $userList.innerHTML = `
       <div class="userList__controlPanel">
         <button class="controlPanel__selectAll">전체 해제</button>
-        <button class="controlPanel__share">공유 목록 저장하기</button>
+        <button class="controlPanel__saveList">공유 목록 저장하기</button>
       </div>
       <div class="userList__contents">
         ${this.state.items
@@ -89,9 +94,6 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
     if (e.target.className === 'userList__button') {
       const $item = e.target.closest('div');
 
-      // 선택, 해제 내용을 id만 담아뒀다가, 내보내기 할 때 subscriptionList에서 item에 필요정보를 취합해서 내보낸다?
-      // 그리고 sharedList 업데이트
-
       if ($item.classList.length === 1) {
         $item.classList.add('selected');
         addSelected($item.id);
@@ -122,8 +124,11 @@ export default function UserList({ $target, initialState, onScrollEnd }) {
     //   }
     // }
 
-    if (e.target.className === 'controlPanel__share') {
+    if (e.target.className === 'controlPanel__saveList') {
       // 현재 선택되어 있는 item들 db로 내보내기
+      // 선택, 해제 내용을 id만 담아뒀다가, 내보내기 할 때 subscriptionList에서 item에 필요정보를 취합해서 내보낸다?
+      // 그리고 sharedList 업데이트
+      onSave(selectedItems);
     }
   });
 }

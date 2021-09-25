@@ -1,4 +1,4 @@
-import { API, request } from './utils/api.js';
+import { API, request, saveList } from './utils/api.js';
 import { getItem, setItem, removeItem } from './utils/storage.js';
 import AuthPage from './components/AuthPage.js';
 import UserPage from './components/UserPage.js';
@@ -57,6 +57,16 @@ export default function App({ $target }) {
         };
         this.setState(nextState, 'userPage');
       }
+    },
+    onSave: async (selectedItems) => {
+      // selectedItem를 기반으로 subscriptionList.items에서 채널id, 채널thumbnail, 채널title을 취합하여 db로 전송
+      // selectedItems 가공하기
+      // const nextShareList =  {}
+
+      await saveList(API.SAVE_LIST, {
+        method: POST,
+        body: JSON.stringify(nextShareList),
+      });
     },
   });
   // const sharePage = new SharePage({ $target });
