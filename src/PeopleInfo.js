@@ -15,8 +15,8 @@ export default function PeopleInfo({ target, initialState, onSubmit }) {
     <div class= 'peopleInfoBlock'>
       <textarea class='inputText'  placeholder='사용자 정보를 입력해 주세요' /></textarea>
       <button class='submitbutton'>팀 제작 시작</button>
-      <input class= 'slider' type='number' min='0' max='10' step='1' value='0' size="6">
-    <div>
+      <input class= 'slider' type='number' min='1' max='10' step='1' value='1' size="6">
+    </div>
     `
   }
 

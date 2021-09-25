@@ -3,7 +3,7 @@ export default function processInput(text) {
 
   text.map((eachPerson) => {
     const [name, mbti] = eachPerson.split(',')
-    processedInput.push([name, mbti.trim()])
+    processedInput.push([name, mbti.trim().toUpperCase()])
   })
 
   return processedInput
