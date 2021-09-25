@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.userInfo__thumbnail {
+  margin: 0 20px;
+  border-radius: 50%;
+}
+
+.userList {
+  width: 100%;
+}
+
+.userList__controlPanel {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.userList__contents {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px 30px;
+}
+
+.userList__item {
+  border: 1px dotted;
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  margin: 15px;
+}
+
+.userList__title {
+  display: block;
+  white-space: nowrap;
+}
+
+.userList__thumbnail {
+  cursor: pointer;
+}
+
+.userList__button {
+  width: 100%;
+}
+
+.selected {
+  border: 4px solid rgb(49, 250, 49);
+}

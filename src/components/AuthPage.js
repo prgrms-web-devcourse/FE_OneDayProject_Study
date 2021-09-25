@@ -16,7 +16,7 @@ export default function AuthPage({ $target }) {
 
     if ($button) {
       location.href =
-        'https://accounts.google.com/o/oauth2/auth?client_id=728301967201-lktppiaq5m7bhf1005hl085mget3dgam.apps.googleusercontent.com&redirect_uri=http://localhost:5000/callback&scope=https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/userinfo.profile&response_type=token';
+        'https://accounts.google.com/o/oauth2/auth?client_id=728301967201-lktppiaq5m7bhf1005hl085mget3dgam.apps.googleusercontent.com&redirect_uri=http://localhost:5000/callback&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube&response_type=token';
     }
   });
 }
