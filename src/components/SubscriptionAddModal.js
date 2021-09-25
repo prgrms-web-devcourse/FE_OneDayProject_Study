@@ -8,8 +8,11 @@ export default function SubscriptionAddModal({ $target, onSubscribe }) {
     <h3 class="modal__title">벨로그 유저명을 입력해주세요</h3>
     <form class="modal__form">
       <div class="modal__input">
-        <span>https://velog.io/@</span>
-        <input class="modal__username-input" type="text" placeholder="유저명"/>
+        <div>
+          <span>https://velog.io/@</span>
+          <input class="modal__username-input" type="text" placeholder="유저명"/>
+        </div>
+        <div class="modal__warn"></div>
       </div>
       <div class="modal__buttons">
         <button type="button" class="modal__button modal__button--secondary">취소</button>
@@ -33,16 +36,22 @@ export default function SubscriptionAddModal({ $target, onSubscribe }) {
     })
   })
 
-  $modalBody.addEventListener('submit', (e) => {
+  $modalBody.addEventListener('submit', async (e) => {
     e.preventDefault()
+    const $warn = document.querySelector('.modal__warn')
+
     const $input = document.querySelector('.modal__username-input')
     const username = $input.value
+
+    if (!username) {
+      $warn.textContent = '빈 값은 등록할 수 없습니다.'
+      return
+    }
     $input.value = ''
 
     this.setState({
       isOpen: false,
     })
-
     onSubscribe(username)
   })
 }
